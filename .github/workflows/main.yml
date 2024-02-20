@@ -28,11 +28,14 @@ jobs:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
 
+      - name: my-step
+        run: echo "Hello ${{ secrets.GITHUB_TOKEN }}"
+
       - name: Create Release
         id: create_release
-#        uses: ncipollo/release-action@v1
-        run: |
-          echo "Hello ${{ secrets.TOKEN }}"
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 #      - name: Upload Release APK
 #        id: upload_release_asset
