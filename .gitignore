@@ -26,13 +26,15 @@ doc/api/
 
 .flutter-plugins
 .flutter-plugins-dependencies
-
+.dart_tool/
+.gitignore/
 
 # Miscellaneous
 *.class
 *.log
 *.pyc
 *.swp
+*.tmp
 .DS_Store
 .atom/
 .buildlog/
@@ -71,3 +73,6 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+.dart_tool/**/build/
+./pubspec.yaml
+./*.lock
