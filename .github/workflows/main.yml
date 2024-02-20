@@ -32,21 +32,19 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: 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
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
 
-      - name: Upload Release APK
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: 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
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: apk/app-debug.apk
-          asset_name: MensaApp.apk
-          asset_content_type: application/zip
+#      - name: Upload Release APK
+#        id: upload_release_asset
+#        uses: actions/upload-release-asset@v1.0.1
+#        env:
+#          GITHUB_TOKEN: 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
+#        
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: apk/app-debug.apk
+#          asset_name: MensaApp.apk
+#          asset_content_type: application/zip
 
 #      - run: flutter pub get
 #      - run: flutter build apk
