@@ -31,9 +31,7 @@ jobs:
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1
-        env:
-          artifact_path: build/app/outputs/apk/release/app-release.apk
-          GITHUB_TOKEN: ${{ secrets.TOKEN  }}
+        run: echo "Hello ${{ secrets.TOKEN }}"
 
 #      - name: Upload Release APK
 #        id: upload_release_asset
