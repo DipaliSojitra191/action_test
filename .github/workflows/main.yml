@@ -21,6 +21,24 @@ jobs:
         with:
           channel: 'beta'
 
+  flutter_build_apk:
+    name: Flutter Build APK
+    needs: code-setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Flutter Build APK
+        run: |
+          flutter pub get
+#          flutter build apk
+#
+#      - uses: actions/upload-artifact@v1
+#        with:
+#          name: release-apk
+#          path: build/app/outputs/apk/release/app-release.apk
+
+
+
+
 #      - run: flutter pub get
 #      - run: flutter build apk
 #      - uses: actions/upload-artifact@v1
