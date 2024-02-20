@@ -26,11 +26,8 @@ jobs:
     needs: code-setup
     runs-on: ubuntu-latest
     steps:
-      - name: Flutter Build APK
-        run: |
-          flutter pub get
-#          flutter build apk
-#
+      - run: flutter pub get
+#      - run: flutter build apk
 #      - uses: actions/upload-artifact@v1
 #        with:
 #          name: release-apk
