@@ -8,6 +8,7 @@ jobs:
         run: echo "Hello World!"
 
   code-setup:
+    needs: my-job
     name: Code Setup
     runs-on: ubuntu-latest
       - uses: actions/checkout@v1
