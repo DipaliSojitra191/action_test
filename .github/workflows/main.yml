@@ -30,7 +30,7 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: ncipollo/release-action@v1
+#        uses: ncipollo/release-action@v1
         run: |
           echo "Hello ${{ secrets.TOKEN }}"
 
