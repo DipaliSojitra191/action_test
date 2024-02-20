@@ -31,7 +31,8 @@ jobs:
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1
-        run: echo "Hello ${{ secrets.TOKEN }}"
+        run: |
+          echo "Hello ${{ secrets.TOKEN }}"
 
 #      - name: Upload Release APK
 #        id: upload_release_asset
