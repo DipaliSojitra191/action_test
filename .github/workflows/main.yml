@@ -30,3 +30,9 @@ jobs:
 
       - name: my-step
         run: echo "Hello ${{ secrets.TOKEN }}"
+
+      - name: Create a Release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'build/app/outputs/apk/release/*.apk'
+          token: ${{ secrets.TOKEN }}
