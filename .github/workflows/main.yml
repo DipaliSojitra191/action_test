@@ -17,13 +17,6 @@ jobs:
         with:
           java-version: '12.x'
 
-
-  flutter_build_apk:
-    name: Flutter Build APK
-    needs: code-setup
-    runs-on: ubuntu-latest
-    steps:
-
       - uses: subosito/flutter-action@v1
         with:
           channel: 'beta'
