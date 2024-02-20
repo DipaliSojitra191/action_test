@@ -31,11 +31,16 @@ jobs:
       - name: my-step
         run: echo "Hello ${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Create Release
-        id: create_release
+      - name: Create a Release in GitHub
         uses: ncipollo/release-action@v1
-        env:
-          token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.TOKEN_GITHUB }}
+
+#      - name: Create Release
+#        id: create_release
+#        uses: ncipollo/release-action@v1
+#        env:
+#          token: ${{ secrets.GITHUB_TOKEN }}
 
 #      - name: Upload Release APK
 #        id: upload_release_asset
