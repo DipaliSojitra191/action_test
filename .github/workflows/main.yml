@@ -41,8 +41,8 @@ jobs:
         run: |
           echo "Workflow failed: ${{ job.status }}"
 
-  code-setup:
-    name: Code Setup
+  release-apk:
+    name: Release APK
     needs: version
     runs-on: ubuntu-latest
     steps:
@@ -65,11 +65,11 @@ jobs:
 
       - name: echo
         run: |
-          echo "Token ${{ secrets.GITHUB_TOKEN }}"
+          echo "GITHUB_TOKEN ${{ secrets.GITHUB_TOKEN }}"
           echo "Token ${{ secrets.TOKEN }}"
-          echo "Hello ${{ github.sha }}"
+          echo "SHA ${{ github.sha }}"
           echo "Ref ${{ github.ref }}"
-          echo "RUN number ${{ github.run_number }}"
+          echo "RUN ${{ github.run_number }}"
 
       - uses: actions/upload-artifact@v2
         with:
