@@ -27,13 +27,6 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
-      - name: Create Artifact
-        shell: bash
-        run: |
-          mkdir Artifact
-          mkdir Artifact/FrEee.WinForms
-          mkdir Artifact/FrEee.WinForms/FrEee
-          mv FrEee.WinForms/bin/Release/net5.0-windows/* Artifact/FrEee.WinForms/FrEee/
 
       - name: my-step
         run: |
