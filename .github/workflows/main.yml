@@ -29,7 +29,7 @@ jobs:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
 
-      - name: my-step
+      - name: echo
         run: |
           echo "Token ${{ secrets.GITHUB_TOKEN }}"
           echo "Token ${{ secrets.TOKEN }}"
@@ -37,9 +37,25 @@ jobs:
           echo "Ref ${{ github.ref }}"
           echo "RUN number ${{ github.run_number }}"
 
-      - uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Download APK from build
+        uses: actions/download-artifact@v1
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          name: apk
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+      - name: Upload Release APK
+        id: upload_release_asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: apk/app-debug.apk
+          asset_name: MensaApp.apk
+          asset_content_type: application/zip
