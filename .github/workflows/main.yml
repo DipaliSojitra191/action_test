@@ -34,5 +34,4 @@ jobs:
       - name: Create Release
         uses: actions/create-artifact@v1
         with:
-          name: APK
-          path: build/app/outputs/apk/release/app-release.apk
+          artifacts: build/app/outputs/apk/release/*.apk
