@@ -36,6 +36,7 @@ jobs:
 
 
 
+
   Setup:
     name: Setup
     needs: version
@@ -49,6 +50,11 @@ jobs:
         with:
           java-version: '16.x'
 
+  release-apk:
+    name: Release APK
+    needs: Setup
+    runs-on: ubuntu-latest
+    steps:
       - uses: subosito/flutter-action@v1
         name: Install Flutter
         with:
@@ -61,7 +67,7 @@ jobs:
 
   upload-apk:
     name: Upload APK
-    needs: Setup
+    needs: release-apk
     runs-on: ubuntu-latest
     steps:
       - uses: actions/upload-artifact@v2
