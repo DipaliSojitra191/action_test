@@ -7,39 +7,39 @@ jobs:
       - name: my-step
         run: echo "Hello World!"
 
-    version:
-      needs: my-job
-      name: Create version number
-      runs-on: ubuntu-latest
-      outputs:
-        output1: ${{ steps.step1.outputs.test }}
-      steps:
-        - uses: actions/checkout@v1
-        - name: Install GitVersion
-          uses: gittools/actions/gitversion/setup@v0.9.7
-          with:
-            versionSpec: "5.x"
+  version:
+    needs: my-job
+    name: Create version number
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
+        with:
+          versionSpec: "5.x"
 
-        - name: gitversion
-          uses: gittools/actions/gitversion/execute@v0.9.7
+      - name: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.7
 
-        - name: Create version.txt with nuGetVersion
-          run: echo ${{ steps.gitversion.outputs.GitVersion_FullSemVer  }} > version.txt
+      - name: Create version.txt with nuGetVersion
+        run: echo ${{ steps.gitversion.outputs.GitVersion_FullSemVer  }} > version.txt
 
-        - name: Set version output
-          id: step1
-          run: echo "test=${{ env.GitVersion_FullSemVer }}" >> $GITHUB_OUTPUT
+      - name: Set version output
+        id: step1
+        run: echo "test=${{ env.GitVersion_FullSemVer }}" >> $GITHUB_OUTPUT
 
-        - name: Upload version.txt as an artifact
-          uses: actions/upload-artifact@v2
-          with:
-            name: version-artifact
-            path: version.txt
-          if: success()
-        - name: Handle error
-          if: failure()
-          run: |
-            echo "Workflow failed: ${{ job.status }}"
+      - name: Upload version.txt as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: version-artifact
+          path: version.txt
+        if: success()
+      - name: Handle error
+        if: failure()
+        run: |
+          echo "Workflow failed: ${{ job.status }}"
 
   code-setup:
     name: Code Setup
