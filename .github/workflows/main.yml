@@ -1,45 +1,9 @@
 name: Main
 on: push
 jobs:
-  version:
-    name: Version
-    runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.step1.outputs.test }}
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.7
-        with:
-          versionSpec: "5.x"
-
-      - name: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.7
-
-      - name: Create version.txt with nuGetVersion
-        run: echo ${{ steps.gitversion.outputs.GitVersion_FullSemVer  }} > version.txt
-
-      - name: Set version output
-        id: step1
-        run: echo "test=${{ env.GitVersion_FullSemVer }}" >> $GITHUB_OUTPUT
-
-      - name: Upload version.txt as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: version-artifact
-          path: version.txt
-        if: success()
-      - name: Handle error
-        if: failure()
-        run: |
-          echo "Workflow failed: ${{ job.status }}"
-
-
-
-
   release-apk:
     name: Release APK
-    needs: version
+#    needs: version
     runs-on: ubuntu-latest
     steps:
 
@@ -47,17 +11,19 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
-
       - uses: subosito/flutter-action@v1
-        with:
-          channel: 'beta'
-      - run: flutter pub get
-      - run: flutter build apk
+        run: ./gradlew build
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+#      - uses: subosito/flutter-action@v1
+#        with:
+#          channel: 'beta'
+#      - run: flutter pub get
+#      - run: flutter build apk
+#
+#      - uses: actions/upload-artifact@v2
+#        with:
+#          name: release-apk
+#          path: build/app/outputs/apk/release/app-release.apk
 
       - name: echo
         run: |
