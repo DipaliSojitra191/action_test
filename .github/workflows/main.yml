@@ -17,16 +17,23 @@ jobs:
         with:
           java-version: '12.x'
 
-#      - uses: subosito/flutter-action@v1
-#        with:
-#          channel: 'beta'
-#      - run: flutter pub get
-#      - run: flutter build apk
-#
-#      - uses: actions/upload-artifact@v1
-#        with:
-#          name: release-apk
-#          path: build/app/outputs/apk/release/app-release.apk
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'beta'
+      - run: flutter pub get
+      - run: flutter build apk
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk
+      - name: Create Artifact
+        shell: bash
+        run: |
+          mkdir Artifact
+          mkdir Artifact/FrEee.WinForms
+          mkdir Artifact/FrEee.WinForms/FrEee
+          mv FrEee.WinForms/bin/Release/net5.0-windows/* Artifact/FrEee.WinForms/FrEee/
 
       - name: my-step
         run: |
@@ -35,10 +42,11 @@ jobs:
           echo "Hello ${{ github.sha }}"
           echo "Ref ${{ github.ref }}"
 
-#      - name: Create a Release in GitHub
-#        uses: actions/create-release@v1
-#        with:
-#          artifacts: "build/app/outputs/apk/release/*.apk"
-#          token: ${{ secrets.TOKEN }}
-#          tag: ${{ github.sha }}
-#          commit: ${{ github.sha }}
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{github.ref}}
+          release_name: ${{github.ref}}
+          body: Auto-generated prerelease build
+          prerelease: true
+          token: ${{secrets.GITHUB_TOKEN}}
