@@ -33,10 +33,6 @@ jobs:
 
 
 
-
-
-
-
   Setup:
     name: Setup
     needs: version
@@ -50,11 +46,6 @@ jobs:
         with:
           java-version: '16.x'
 
-  release-apk:
-    name: Release APK
-    needs: Setup
-    runs-on: ubuntu-latest
-    steps:
       - uses: subosito/flutter-action@v1
         name: Install Flutter
         with:
@@ -62,14 +53,19 @@ jobs:
       - run: flutter pub get
         name: Get dependencies
 
+      - name: Echo
+        run: |
+          echo "GITHUB_TOKEN ${{ secrets.GITHUB_TOKEN }}"
+          echo "Token ${{ secrets.TOKEN }}"
+          echo "SHA ${{ github.sha }}"
+          echo "Ref ${{ github.ref }}"
+          echo "RUN ${{ github.run_number }}"
+          echo "RUN ${{ needs.version.outputs }}"
+          echo "RUN ${{ needs.version.outputs.output1 }}"
+
       - run: flutter build apk
         name: Build APK
 
-  upload-apk:
-    name: Upload APK
-    needs: release-apk
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/upload-artifact@v2
         name: Upload APK
         with:
