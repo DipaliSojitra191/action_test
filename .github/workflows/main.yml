@@ -46,6 +46,3 @@ jobs:
           release_name: ${{github.ref}}
           body: Auto-generated prerelease build
           prerelease: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          token: ${{secrets.GITHUB_TOKEN}}
-          auth:  ${{secrets.GITHUB_TOKEN}}
