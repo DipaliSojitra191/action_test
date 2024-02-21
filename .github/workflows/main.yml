@@ -2,7 +2,7 @@ name: Main
 on: push
 jobs:
   version:
-    name: Create version number
+    name: Version
     runs-on: ubuntu-latest
     outputs:
       output1: ${{ steps.step1.outputs.test }}
@@ -67,8 +67,8 @@ jobs:
           echo "RUN ${{ github.run_number }}"
 
 
-      - name: Create a Release in GitHub
-        uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v1
+        name: Create a Release in GitHub
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
           token: ${{ secrets.TOKEN }}
