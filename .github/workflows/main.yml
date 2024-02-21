@@ -3,7 +3,6 @@ on: push
 jobs:
 
   version:
-    needs: build
     name: Create version number
     runs-on: ubuntu-latest
     outputs:
