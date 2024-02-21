@@ -38,6 +38,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/release/*.apk"
-          token: ${{ secrets.token }}
+          token: ${{ secrets.TOKEN }}
           tag: ${{ github.sha }}
           commit: ${{ github.sha }}
