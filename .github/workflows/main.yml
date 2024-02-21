@@ -31,12 +31,16 @@ jobs:
         run: |
           echo "Workflow failed: ${{ job.status }}"
 
-  release-apk:
-    name: Release APK
+
+
+
+
+
+  Setup:
+    name: Setup
     needs: version
     runs-on: ubuntu-latest
     steps:
-
       - uses: actions/checkout@v1
         name: Get latest commit
 
@@ -55,19 +59,16 @@ jobs:
       - run: flutter build apk
         name: Build APK
 
+  upload-apk:
+    name: Upload APK
+    needs: Setup
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/upload-artifact@v2
         name: Upload APK
         with:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
-
-      - name: Echo
-        run: |
-          echo "GITHUB_TOKEN ${{ secrets.GITHUB_TOKEN }}"
-          echo "Token ${{ secrets.TOKEN }}"
-          echo "SHA ${{ github.sha }}"
-          echo "Ref ${{ github.ref }}"
-          echo "RUN ${{ github.run_number }}"
 
       - uses: actions/create-release@v1
         name: Create a Release in GitHub
