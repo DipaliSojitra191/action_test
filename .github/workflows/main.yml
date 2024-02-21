@@ -32,6 +32,6 @@ jobs:
           echo "RUN ${{ github.run_number }}"
 
       - name: Create Release
-        uses: actions/create-artifact@v1
+        uses: ncipollo/release-action@v1
         with:
           artifacts: build/app/outputs/apk/release/*.apk
