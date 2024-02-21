@@ -75,7 +75,7 @@ jobs:
 
   Setup1:
     name: Setup1
-    needs: setup
+    needs: setup, version
     runs-on: ubuntu-latest
     steps:
       - name: Echo
