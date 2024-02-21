@@ -46,8 +46,8 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
-          commit: ${{ github.sha }}
-          token: ${{ secrets.TOKEN }}
+#          commit: ${{ github.sha }}
+#          token: ${{ secrets.TOKEN }}
 
 
 #          artifact: build/app/outputs/apk/release/app-release.apk
