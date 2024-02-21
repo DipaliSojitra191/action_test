@@ -33,6 +33,7 @@ jobs:
 
 
 
+
   Setup:
     name: Setup
     needs: version
@@ -71,6 +72,17 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
+
+  Setup1:
+    name: Setup1
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        run: |
+          echo "o1 ${{ needs.setup.outputs.output1 }}"
+          echo "RUN ${{ needs.version.outputs.output1 }}"
+  
 
       - uses: actions/create-release@v1
         name: Create a Release in GitHub
