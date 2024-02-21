@@ -83,5 +83,6 @@ jobs:
         with:
           artifacts: build/app/outputs/apk/release/*.apk
           token: ${{ secrets.TOKEN }}
+          tag_name: ${{ needs.version.outputs.output1 }}
           tag: ${{ needs.version.outputs.output1 }}
           commit: ${{ github.sha }}
