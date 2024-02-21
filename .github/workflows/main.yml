@@ -91,7 +91,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/release/*.apk"
-          token: ${{ secrets.TOKEN_GITHUB }}
+          token: ${{ secrets.TOKEN }}
           tag: ${{ needs.version.outputs.output1 }}
           commit: ${{ github.sha }}
 
