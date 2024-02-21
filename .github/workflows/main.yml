@@ -17,16 +17,19 @@ jobs:
         with:
           java-version: '12.x'
 
-      - uses: subosito/flutter-action@v1
-        with:
-          channel: 'beta'
-      - run: flutter pub get
-      - run: flutter build apk
+#      - uses: subosito/flutter-action@v1
+#        with:
+#          channel: 'beta'
+#      - run: flutter pub get
+#      - run: flutter build apk
 
-      - uses: actions/upload-artifact@v1
-        with:
-          name: release-apk
-          path: build/app/outputs/apk/release/app-release.apk
+#      - uses: actions/upload-artifact@v1
+#        with:
+#          name: release-apk
+#          path: build/app/outputs/apk/release/app-release.apk
+
+      - name: Build apk debug project (APK) - ${{ env.main_project_module }} module
+        run: ./gradlew assembleDebug
 
       - name: my-step
         run: |
@@ -35,9 +38,11 @@ jobs:
           echo "Hello ${{ github.sha }}"
           echo "Ref ${{ github.ref }}"
 
-      - name: Create Release
-        uses: actions/create-release@v1
+      - name: Build apk release project (APK) - ${{ env.main_project_module }} module
+        run: ./gradlew assemble
+
+      - name: Upload APK Release - ${{ env.repository_name }}
+        uses: actions/upload-artifact@v3
         with:
-          tag_name: ${{github.ref}}
-          release_name: ${{github.ref}}
-          prerelease: true
+          name: ${{ env.date_today }} - ${{ env.playstore_name }} - ${{ env.repository_name }} - APK(s) release generated
+          path: ${{ env.main_project_module }}/build/outputs/apk/release/app-release.apk
