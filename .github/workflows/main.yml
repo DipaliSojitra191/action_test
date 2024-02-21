@@ -68,7 +68,6 @@ jobs:
 
 
       - uses: actions/upload-artifact@v1
-        name: Create a Release in GitHub
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
           token: ${{ secrets.TOKEN }}
