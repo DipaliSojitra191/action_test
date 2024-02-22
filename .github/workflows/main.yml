@@ -83,6 +83,7 @@ jobs:
         name: Create a Release in GitHub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          tag_name: ${{ needs.version.outputs.output1 }}
         with:
           artifacts: ${{ needs.setup.outputs.output1 }}
           token: ${{ secrets.TOKEN }}
