@@ -1,3 +1,6 @@
+# settings-> security-> secrets-> secrets and variable-> add new secret.
+# settings-> actions-> general-> Workflow permissions-> Allow read and write permission
+
 name: Main
 on: push
 jobs:
