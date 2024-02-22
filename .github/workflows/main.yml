@@ -74,22 +74,22 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: build/app/outputs/apk/release/app-release.apk
+          upload_url: ${{ steps.create_release.outputs.upload_url }} #4 This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: build/app/outputs/apk/release/app-release.apk # 2
           asset_name: app-release.apk
           asset_content_type: application/zip
 
-#      - uses: actions/create-release@v1
-#        name: Create a Release in GitHub
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          artifacts: ${{ needs.setup.outputs.output1 }}
-#          token: ${{ secrets.TOKEN }}
-#          tag_name: ${{ needs.version.outputs.output1 }}
-#          tag: ${{ needs.version.outputs.output1 }}
-#          commit: ${{ github.sha }}
-#          upload_url: ${{ steps.create_release.outputs.upload_url }}
-#          asset_path: ./app/build/outputs/apk/debug/app-debug.apk
-#          asset_name: app-debug.apk
-#          asset_content_type: application/zip
+      - uses: actions/create-release@v1 3
+        name: Create a Release in GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          artifacts: ${{ needs.setup.outputs.output1 }}
+          token: ${{ secrets.TOKEN }}
+          tag_name: ${{ needs.version.outputs.output1 }}
+          tag: ${{ needs.version.outputs.output1 }}
+          commit: ${{ github.sha }}
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./app/build/outputs/apk/debug/app-release.apk
+          asset_name: app-debug.apk
+          asset_content_type: application/zip
