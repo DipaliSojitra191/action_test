@@ -57,6 +57,9 @@ jobs:
       - run: flutter pub get
         name: Get dependencies
 
+      - name: Flutter Test
+        run: flutter test --coverage
+
       - name: Echo
         run: |
           echo "GITHUB_TOKEN ${{ secrets.GITHUB_TOKEN }}"
@@ -90,6 +93,7 @@ jobs:
           tag_name: ${{ needs.version.outputs.output1 }}
           tag: ${{ needs.version.outputs.output1 }}
           commit: ${{ github.sha }}
+
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: build/app/outputs/apk/release/app-release.apk
           asset_name: app-release.apk
