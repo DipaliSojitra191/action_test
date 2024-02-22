@@ -79,17 +79,17 @@ jobs:
           asset_name: app-debug.apk
           asset_content_type: application/zip
 
-      - uses: actions/create-release@v1
-        name: Create a Release in GitHub
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          artifacts: ${{ needs.setup.outputs.output1 }}
-          token: ${{ secrets.TOKEN }}
-          tag_name: ${{ needs.version.outputs.output1 }}
-          tag: ${{ needs.version.outputs.output1 }}
-          commit: ${{ github.sha }}
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./app/build/outputs/apk/debug/app-debug.apk
-          asset_name: app-debug.apk
-          asset_content_type: application/zip
+#      - uses: actions/create-release@v1
+#        name: Create a Release in GitHub
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          artifacts: ${{ needs.setup.outputs.output1 }}
+#          token: ${{ secrets.TOKEN }}
+#          tag_name: ${{ needs.version.outputs.output1 }}
+#          tag: ${{ needs.version.outputs.output1 }}
+#          commit: ${{ github.sha }}
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: ./app/build/outputs/apk/debug/app-debug.apk
+#          asset_name: app-debug.apk
+#          asset_content_type: application/zip
