@@ -79,7 +79,7 @@ jobs:
           asset_name: app-release.apk
           asset_content_type: application/zip
 
-      - uses: actions/create-release@v1 3
+      - uses: actions/create-release@v13
         name: Create a Release in GitHub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
