@@ -90,6 +90,6 @@ jobs:
           tag: ${{ needs.version.outputs.output1 }}
           commit: ${{ github.sha }}
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./app/build/outputs/apk/debug/app-release.apk
-          asset_name: app-debug.apk
+          asset_path: build/app/outputs/apk/release/app-release.apk
+          asset_name: app-release.apk
           asset_content_type: application/zip
